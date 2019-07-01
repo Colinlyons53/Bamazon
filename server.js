@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
     user: "root",
   
     // Your password
-    password: "password",
+    password: "",
     database: "Bamazon"
   });
 
@@ -27,19 +27,20 @@ connection.connect(function(err) {
     if (err) throw err;
     // run the start function after the connection is made to prompt the user
     start();
+
   });
 
 
-// // function which prompts the user for what action they should take
-// function start() {
-//     connection.query(
-//         "select * from products", function(err, res, fields){
-//             if (err) throw err;
-//             console.table(res);
+// function which prompts the user for what action they should take
+function start() {
+    connection.query(
+        "select * from products", function(err, res,){
+            if (err) throw err;
+            console.table(res);
 
-//         }) 
+        }) 
 
-//     }
+    }
 //     inquirer
 //       .prompt({
 //         name: "postOrBid",
@@ -62,22 +63,22 @@ connection.connect(function(err) {
   
   
 
-// // Create a generic function to handle requests and responses
-// function handleRequest(request, response) {
+// Create a generic function to handle requests and responses
+function handleRequest(request, response) {
 
-//   // Send the below string to the client when the user visits the PORT URL
-//   response.end("It Works!! Path Hit: " + request.url);
-// }
+  // Send the below string to the client when the user visits the PORT URL
+  response.end("It Works!! Path Hit: " + request.url);
+}
 
-// // Use the Node HTTP package to create our server.
-// // Pass the handleRequest function to empower it with functionality.
-// var server = http.createServer(handleRequest);
+// Use the Node HTTP package to create our server.
+// Pass the handleRequest function to empower it with functionality.
+var server = http.createServer(handleRequest);
 
-// // Start our server so that it can begin listening to client requests.
-// server.listen(PORT, function() {
+// Start our server so that it can begin listening to client requests.
+server.listen(PORT, function() {
 
-//   // Log (server-side) when our server has started
-//   console.log("Server listening on: http://localhost:" + PORT);
-// });
+  // Log (server-side) when our server has started
+  console.log("Server listening on: http://localhost:" + PORT);
+});
 
 
